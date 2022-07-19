@@ -1,24 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import GlobalStyle from "./globalStyles";
+import products from "./products";
+import Header from "./layout/Header";
+import ProductMain from "./components/ProductMain";
+import ProductImages from "./components/ProductImages";
+import ProductDetails from "./components/ProductDetails";
+import Footer from "./layout/Footer";
+import Lightbox from "./components/Lightbox";
+import useBreakpoints from "./hooks/useBreakpoints";
+import { CartProvider } from "./contexts/CartContext";
 
 function App() {
+  // Fetch single product data
+  const product = products[0];
+
+  // Replicate modal context
+  const showModal = false;
+
+  const { isDesktop } = useBreakpoints();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <GlobalStyle />
+      {isDesktop && showModal && <Lightbox images={product.images} />}
+      <CartProvider>
+        <Header />
+        <ProductMain>
+          <ProductImages images={product.images} />
+          <ProductDetails company={product.company} name={product.name} description={product.description} discount={product.discount} price={product.price} />
+        </ProductMain>
+        <Footer />
+      </CartProvider>
+    </>
   );
 }
 

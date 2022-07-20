@@ -1,8 +1,7 @@
-import { useContext, useRef } from "react";
+import { useContext, useRef, useEffect } from "react";
 import CartContext from "../../contexts/CartContext";
 import styled from "styled-components";
 import CartItem from "./CartItem";
-import ClickOutside from "../ClickOutside";
 
 const Container = styled.div`
   border-radius: 10px;
@@ -51,6 +50,20 @@ const Cart = () => {
   const { cartOpen, items, cartBtnRef, openCart } = useContext(CartContext);
   const cartRef = useRef();
 
+  useEffect(() => {
+    if (cartOpen) {
+      document.addEventListener("click", handleOutsideClick);
+    }
+
+    return () => document.removeEventListener("click", handleOutsideClick);
+
+    function handleOutsideClick(e) {
+      if (cartRef.current && !cartRef.current.contains(e.target) && !cartBtnRef.current.contains(e.target)) {
+        openCart();
+      }
+    }
+  }, [cartRef, cartBtnRef, cartOpen, openCart]);
+
   return (
     <Container ref={cartRef} className={cartOpen ? "open" : ""}>
       <CartHeader>Cart</CartHeader>
@@ -62,7 +75,6 @@ const Cart = () => {
             return <CartItem key={item.productName} item={item} />;
           })
         )}
-        {cartOpen && <ClickOutside parentRef={cartRef} onClickOutside={openCart} secondRef={cartBtnRef}></ClickOutside>}
       </Contents>
     </Container>
   );

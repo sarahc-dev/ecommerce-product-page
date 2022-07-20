@@ -12,9 +12,9 @@ const HeaderWrapper = styled.header`
   display: flex;
   align-items: center;
   gap: 1rem;
-  padding: 1.1875rem 1.5rem 1.5rem;
-  max-width: 550px;
   margin-inline: auto;
+  max-width: 550px;
+  padding: 1.1875rem 1.5rem 1.5rem;
 
   @media (min-width: 500px) {
     padding-block: 2rem;
@@ -22,13 +22,19 @@ const HeaderWrapper = styled.header`
 
   @media (min-width: 1000px) {
     gap: 2.5rem;
-    padding: 1.75rem 0 2.125rem;
-    max-width: unset;
     margin-inline: clamp(2rem, 11.5%, 10.3125rem);
+    max-width: unset;
+    padding: 1.75rem 0 2.125rem;
 
     & button {
       display: none;
     }
+  }
+`;
+
+const Button = styled.button`
+  &:focus {
+    outline-offset: 5px;
   }
 `;
 
@@ -47,6 +53,7 @@ const CartWrapper = styled.div`
   }
 
   &:focus {
+    outline-color: var(--clr-highlight);
     outline-offset: 5px;
   }
 `;
@@ -59,19 +66,19 @@ const StyledIconCart = styled(IconCart)`
 
 const CartBubble = styled.div`
   background-color: var(--clr-highlight);
-  color: var(--clr-white);
-  font-size: 0.625rem;
-  font-weight: 700;
-  line-height: 1;
-  width: 1.1875rem;
-  height: 0.8125rem;
   border-radius: 6.5px;
-  position: absolute;
-  top: -2px;
-  right: -6px;
+  color: var(--clr-white);
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 0.625rem;
+  font-weight: 700;
+  height: 0.8125rem;
+  line-height: 1;
+  position: absolute;
+  top: -2px;
+  right: -6px;
+  width: 1.1875rem;
 
   &.empty {
     display: none;
@@ -82,42 +89,44 @@ const Avatar = styled.img`
   border-radius: 100px;
   cursor: pointer;
   height: 1.5rem;
-  width: 1.5rem;
   outline-offset: -1px;
   outline-color: var(--clr-white);
   transition: outline 0.1s;
+  width: 1.5rem;
 
   &:hover {
     outline: 1px solid var(--clr-highlight);
   }
 
+  &:hover,
+  &:focus {
+    outline: 2px solid var(--clr-highlight);
+  }
+
   @media (min-width: 825px) {
     height: 3.125rem;
     width: 3.125rem;
-
-    &:hover {
-      outline: 2px solid var(--clr-highlight);
-    }
   }
 `;
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const { openCart, total } = useContext(CartContext);
-  const menuBtnRef = useRef();
   const cartRef = useRef();
 
-  function handleClose() {
-    setMenuOpen(false);
+  function handleClose(e) {
+    if (e.key === "Enter" || e.type === "click" || e === "outside") {
+      setMenuOpen(false);
+    }
   }
 
   return (
     <HeaderWrapper>
-      <button ref={menuBtnRef} aria-controls="primary-nav" aria-expanded={menuOpen} onClick={() => setMenuOpen(true)}>
+      <Button aria-controls="primary-nav" aria-expanded={menuOpen} onClick={() => setMenuOpen(true)}>
         <img src={IconMenu} alt="Menu" />
-      </button>
+      </Button>
       <img src={IconLogo} alt="sneakers" height="20" width="137.5" />
-      <NavLinks isMenuOpen={menuOpen} closeMenu={handleClose} buttonRef={menuBtnRef} />
+      <NavLinks isMenuOpen={menuOpen} closeMenu={handleClose} />
       <CartWrapper
         ref={cartRef}
         onClick={() => openCart(cartRef)}
@@ -129,7 +138,7 @@ const Header = () => {
         <CartBubble className={total === 0 && "empty"}>{total}</CartBubble>
         <StyledIconCart />
       </CartWrapper>
-      <Avatar src={ImageAvatar} alt="User avatar" />
+      <Avatar src={ImageAvatar} alt="User avatar" tabIndex="0" />
     </HeaderWrapper>
   );
 };

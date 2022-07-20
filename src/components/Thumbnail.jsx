@@ -3,6 +3,11 @@ import styled from "styled-components";
 const Container = styled.div`
   cursor: pointer;
   position: relative;
+
+  &:focus {
+    outline-offset: 8px;
+    outline-color: var(--clr-highlight);
+  }
 `;
 
 const Img = styled.img`
@@ -36,7 +41,7 @@ const Overlay = styled.div`
 
 const Thumbnail = ({ image, active, selectImage }) => {
   return (
-    <Container onClick={selectImage}>
+    <Container onClick={selectImage} onKeyDown={selectImage} tabIndex={active === image.id ? "-1" : "0"}>
       <Img src={image.thumbnail} alt={image.alt} height="88" width="88" className={active === image.id ? "active" : ""} />
       <Overlay className={active === image.id ? "active" : ""}></Overlay>
     </Container>

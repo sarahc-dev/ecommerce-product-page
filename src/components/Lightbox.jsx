@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useContext, useRef, useState } from "react";
 import styled from "styled-components";
 import { ReactComponent as Close } from "../images/icon-close.svg";
 import ImageSlider from "./ImageSlider";
 import SlideshowButton from "./SlideshowButton";
 import ThumbnailContainer from "./ThumbnailContainer";
+import ModalContext from "../contexts/ModalContext";
 import { handlesLightboxScroll, handlesSlideshowButtons } from "../utils/slideshow";
 
 const ModalBackground = styled.div`
@@ -16,11 +17,7 @@ const ModalBackground = styled.div`
   top: 0;
   bottom: 0;
   width: 100vw;
-
-  ${
-    "" /* min-height: 100vh;
-  z-index: 4; */
-  }
+  z-index: 2;
 
   @media (max-height: 800px) {
     align-items: start;
@@ -59,7 +56,9 @@ const ImageContainer = styled.div`
 `;
 
 const Lightbox = ({ images }) => {
-  const [active, setActive] = useState(0);
+  const { toggleModal, clickedImage } = useContext(ModalContext);
+  const [active, setActive] = useState(clickedImage);
+  const imageRef = useRef(null);
 
   // Sets active image to the scrolled to image
   function handleScroll(position) {
@@ -71,19 +70,33 @@ const Lightbox = ({ images }) => {
     setActive(handlesSlideshowButtons(direction, active));
   }
 
+  // Sets active image to the clicked thumbnail
+  function handleThumbnail(id) {
+    setActive(id);
+  }
+
+  // Close modal on click outside image
+  function closeModal(e) {
+    if (imageRef.current && !imageRef.current.contains(e.target)) {
+      toggleModal();
+    }
+  }
+
   return (
-    <ModalBackground>
+    <ModalBackground onClick={(e) => closeModal(e)}>
       <Container>
         <Button>
           <StyledClose />
           <span className="sr-only">Close</span>
         </Button>
-        <ImageContainer>
-          <SlideshowButton direction="previous" switchImage={() => handleButton("previous")} />
-          <ImageSlider images={images} active={active} scrollImage={(e) => handleScroll(e.target.scrollLeft)} />
-          <SlideshowButton direction="next" switchImage={() => handleButton("next")} />
-        </ImageContainer>
-        <ThumbnailContainer images={images} active={active} />
+        <div ref={imageRef}>
+          <ImageContainer>
+            <SlideshowButton direction="previous" switchImage={() => handleButton("previous")} />
+            <ImageSlider images={images} active={active} scrollImage={(e) => handleScroll(e.target.scrollLeft)} />
+            <SlideshowButton direction="next" switchImage={() => handleButton("next")} />
+          </ImageContainer>
+          <ThumbnailContainer images={images} active={active} selectImage={(id) => handleThumbnail(id)} />
+        </div>
       </Container>
     </ModalBackground>
   );

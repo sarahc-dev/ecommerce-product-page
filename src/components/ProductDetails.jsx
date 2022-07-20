@@ -7,7 +7,6 @@ const Container = styled.div`
 
   @media (min-width: 1000px) {
     padding: 0;
-    align-self: center;
     max-width: 700px;
   }
 `;

@@ -9,11 +9,22 @@ const Container = styled.div`
   max-width: 445px;
 `;
 
-const ThumbnailContainer = ({ images, active }) => {
+const ThumbnailContainer = ({ images, active, selectImage }) => {
   return (
     <Container>
       {images.map((image) => {
-        return <Thumbnail key={image.id} image={image} active={active} />;
+        return (
+          <Thumbnail
+            key={image.id}
+            image={image}
+            active={active}
+            selectImage={(e) => {
+              if (e.key === "Enter" || e.type === "click") {
+                selectImage(image.id);
+              }
+            }}
+          />
+        );
       })}
     </Container>
   );

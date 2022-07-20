@@ -31,6 +31,12 @@ const TextContainer = styled.div`
   }
 `;
 
+const DeleteButton = styled.button`
+  &:focus {
+    outline-offset: 5px;
+  }
+`;
+
 const Button = styled.button`
   background-color: var(--clr-highlight);
   border-radius: 10px;
@@ -43,6 +49,10 @@ const Button = styled.button`
 
   &:hover {
     background-color: var(--clr-highlight-hover);
+  }
+
+  &:focus {
+    outline-offset: 5px;
   }
 `;
 
@@ -57,8 +67,7 @@ const StyledDelete = styled(Delete)`
 
 const CartItem = ({ item }) => {
   const { deleteFromCart } = useContext(CartContext);
-
-  const index = products.findIndex((product) => product.itemName === item.productName);
+  const index = products.findIndex((product) => product.name === item.productName);
   const product = products[index];
   const price = product.discount ? getDiscountPrice(product.price, product.discount) : product.price;
   const total = price * item.amount;
@@ -74,10 +83,10 @@ const CartItem = ({ item }) => {
             <span>{`$${total.toFixed(2)}`}</span>
           </p>
         </TextContainer>
-        <button onClick={() => deleteFromCart(item.productName)}>
+        <DeleteButton onClick={() => deleteFromCart(item.productName)} tabIndex="0">
           <StyledDelete />
           <span className="sr-only">Delete</span>
-        </button>
+        </DeleteButton>
       </ProductContainer>
       <Button>Checkout</Button>
     </Container>

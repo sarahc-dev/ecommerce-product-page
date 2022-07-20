@@ -79,6 +79,10 @@ const Add = styled.button`
     background-color: var(--clr-highlight-hover);
   }
 
+  &:focus {
+    outline-offset: 5px;
+  }
+
   @media (min-width: 1000px) {
     margin-top: 0;
     margin-left: 1rem;

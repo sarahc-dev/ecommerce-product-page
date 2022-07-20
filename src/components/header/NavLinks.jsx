@@ -1,7 +1,6 @@
 import { useRef } from "react";
 import styled from "styled-components";
 import IconClose from "../../images/icon-close.svg";
-// import useClickOutside from "../hooks/useClickOutside";
 
 const Background = styled.div`
   background-color: var(--clr-lightbox);
@@ -51,6 +50,7 @@ const NavWrapper = styled.div`
 
     &:focus {
       outline-offset: 5px;
+      outline-color: var(--clr-highlight);
     }
   }
 
@@ -65,6 +65,12 @@ const NavWrapper = styled.div`
   }
 `;
 
+const Close = styled.img`
+  &:focus {
+    outline-offset: 5px;
+  }
+`;
+
 const Nav = styled.nav`
   margin-top: 3.375rem;
 
@@ -74,7 +80,6 @@ const Nav = styled.nav`
 
   @media (min-width: 1000px) {
     margin-top: 0;
-
     font-size: 0.9375rem;
     font-weight: 400;
 
@@ -113,28 +118,20 @@ const Nav = styled.nav`
   }
 `;
 
-const NavLinks = ({ isMenuOpen, closeMenu, buttonRef }) => {
+const NavLinks = ({ isMenuOpen, closeMenu }) => {
   const menuRef = useRef();
 
   function handleOutsideClick(e) {
     if (menuRef.current && !menuRef.current.contains(e.target)) {
-      closeMenu();
+      closeMenu("outside");
     }
   }
-
-  // useClickOutside(
-  //   menuRef,
-  //   () => {
-  //     closeMenu();
-  //   },
-  //   buttonRef
-  // );
 
   return (
     <>
       <Background className={isMenuOpen ? "open" : ""} onClick={(e) => handleOutsideClick(e)}></Background>
       <NavWrapper ref={menuRef} className={isMenuOpen ? "open" : ""}>
-        <img src={IconClose} alt="Close menu" onClick={closeMenu} />
+        <Close src={IconClose} alt="Close menu" onClick={closeMenu} onKeyDown={closeMenu} tabIndex="0" />
         <Nav id="primary-nav">
           <ul>
             <li>

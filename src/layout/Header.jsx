@@ -6,6 +6,13 @@ import IconMenu from "../images/icon-menu.svg";
 import IconLogo from "../images/logo.svg";
 import ImageAvatar from "../images/image-avatar.png";
 import { ReactComponent as IconCart } from "../images/icon-cart.svg";
+import Cart from "../components/header/Cart";
+
+const Button = styled.button`
+  &:focus {
+    outline-offset: 5px;
+  }
+`;
 
 const HeaderWrapper = styled.header`
   border-bottom: 1px solid var(--clr-line);
@@ -26,16 +33,14 @@ const HeaderWrapper = styled.header`
     max-width: unset;
     padding: 1.75rem 0 2.125rem;
 
-    & button {
+    & ${Button} {
       display: none;
     }
   }
 `;
 
-const Button = styled.button`
-  &:focus {
-    outline-offset: 5px;
-  }
+const Logo = styled.img`
+  width: 137.5px;
 `;
 
 const CartWrapper = styled.div`
@@ -125,7 +130,7 @@ const Header = () => {
       <Button aria-controls="primary-nav" aria-expanded={menuOpen} onClick={() => setMenuOpen(true)}>
         <img src={IconMenu} alt="Menu" />
       </Button>
-      <img src={IconLogo} alt="sneakers" height="20" width="137.5" />
+      <Logo src={IconLogo} alt="sneakers" height="20" width="137" />
       <NavLinks isMenuOpen={menuOpen} closeMenu={handleClose} />
       <CartWrapper
         ref={cartRef}
@@ -139,6 +144,7 @@ const Header = () => {
         <StyledIconCart />
       </CartWrapper>
       <Avatar src={ImageAvatar} alt="User avatar" tabIndex="0" />
+      <Cart />
     </HeaderWrapper>
   );
 };

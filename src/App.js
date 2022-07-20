@@ -2,7 +2,6 @@ import { useContext } from "react";
 import GlobalStyle from "./globalStyles";
 import products from "./products";
 import Header from "./layout/Header";
-import Cart from "./components/header/Cart";
 import ProductMain from "./components/ProductMain";
 import ProductImages from "./components/ProductImages";
 import ProductDetails from "./components/ProductDetails";
@@ -25,7 +24,6 @@ function App() {
       {isDesktop && showModal && <Lightbox images={product.images} />}
       <CartProvider>
         <Header />
-        <Cart />
         <ProductMain>
           <ProductImages images={product.images} />
           <ProductDetails company={product.company} name={product.name} description={product.description} discount={product.discount} price={product.price} />

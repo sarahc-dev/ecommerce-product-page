@@ -53,7 +53,7 @@ const PriceContainer = styled.div`
   }
 `;
 
-const Price = styled.h3`
+const Price = styled.h2`
   color: var(--clr-headers);
   font-size: 1.75rem;
   line-height: 2.1875rem;

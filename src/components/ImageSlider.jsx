@@ -27,14 +27,14 @@ const Image = styled.img`
   scroll-snap-align: start;
 
   @supports not (aspect-ratio: 2) {
-    height: unset;
+    height: auto;
   }
 
   @media (min-width: 500px) {
     height: 400px;
 
     @supports not (aspect-ratio: 2) {
-      height: unset;
+      height: auto;
     }
   }
 

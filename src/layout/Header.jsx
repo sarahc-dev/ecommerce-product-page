@@ -47,13 +47,11 @@ const HeaderWrapper = styled.header`
   max-width: 550px;
   padding: 1.1875rem 1.5rem 1.5rem;
 
-  @supports not (gap: 1rem) {
-    & ${Button} {
-      margin-right: 1rem;
-    }
+  > * {
+    margin: 0 0.5rem;
 
-    & ${Avatar} {
-      margin-left: 1rem;
+    @supports selector(:first-child) {
+      margin: 0;
     }
   }
 

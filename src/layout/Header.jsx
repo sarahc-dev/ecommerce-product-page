@@ -12,6 +12,10 @@ const Button = styled.button`
   &:focus {
     outline-offset: 5px;
   }
+
+  @supports not (gap: 1rem) {
+    margin-right: 1rem;
+  }
 `;
 
 const HeaderWrapper = styled.header`

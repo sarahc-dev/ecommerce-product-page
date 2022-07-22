@@ -20,7 +20,7 @@ const ImageContainer = styled.div`
 `;
 
 const Image = styled.img`
-  aspect-ratio: 2;
+  ${"" /* aspect-ratio: 2; */}
   height: 300px;
   margin-right: 0.75rem;
   object-fit: cover;
@@ -28,6 +28,7 @@ const Image = styled.img`
 
   @supports not (aspect-ratio: 2) {
     height: auto;
+    width: 100vw;
   }
 
   @media (min-width: 500px) {

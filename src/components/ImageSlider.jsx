@@ -28,7 +28,8 @@ const Image = styled.img`
 
   @supports not (aspect-ratio: 2) {
     height: auto;
-    width: 100vw;
+    width: 100%;
+    object-fit: unset;
   }
 
   @media (min-width: 500px) {

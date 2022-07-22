@@ -12,9 +12,29 @@ const Button = styled.button`
   &:focus {
     outline-offset: 5px;
   }
+`;
 
-  @supports not (gap: 1rem) {
-    margin-right: 1rem;
+const Avatar = styled.img`
+  border-radius: 100px;
+  cursor: pointer;
+  height: 1.5rem;
+  outline-offset: -1px;
+  outline-color: var(--clr-white);
+  transition: outline 0.1s;
+  width: 1.5rem;
+
+  &:hover {
+    outline: 1px solid var(--clr-highlight);
+  }
+
+  &:hover,
+  &:focus {
+    outline: 2px solid var(--clr-highlight);
+  }
+
+  @media (min-width: 825px) {
+    height: 3.125rem;
+    width: 3.125rem;
   }
 `;
 
@@ -26,6 +46,16 @@ const HeaderWrapper = styled.header`
   margin: 0 auto;
   max-width: 550px;
   padding: 1.1875rem 1.5rem 1.5rem;
+
+  @supports not (gap: 1rem) {
+    & ${Button} {
+      margin-right: 1rem;
+    }
+
+    & ${Avatar} {
+      margin-left: 1rem;
+    }
+  }
 
   @media (min-width: 500px) {
     padding: 2rem 1.5rem;
@@ -91,30 +121,6 @@ const CartBubble = styled.div`
 
   &.empty {
     display: none;
-  }
-`;
-
-const Avatar = styled.img`
-  border-radius: 100px;
-  cursor: pointer;
-  height: 1.5rem;
-  outline-offset: -1px;
-  outline-color: var(--clr-white);
-  transition: outline 0.1s;
-  width: 1.5rem;
-
-  &:hover {
-    outline: 1px solid var(--clr-highlight);
-  }
-
-  &:hover,
-  &:focus {
-    outline: 2px solid var(--clr-highlight);
-  }
-
-  @media (min-width: 825px) {
-    height: 3.125rem;
-    width: 3.125rem;
   }
 `;
 

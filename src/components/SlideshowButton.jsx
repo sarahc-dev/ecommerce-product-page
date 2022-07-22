@@ -10,7 +10,7 @@ const Button = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-inline: 1rem;
+  margin: 0 1rem;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);

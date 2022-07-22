@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const Main = styled.main`
-  margin-inline: auto;
+  margin: 0 auto;
   max-width: 550px;
   min-height: calc(100vh - 4.25rem);
 
@@ -16,7 +16,7 @@ const Main = styled.main`
 
   @media (min-width: 1250px) {
     gap: 125px;
-    padding-inline: calc(10.3125rem + 3rem) 10.3125rem;
+    padding: 0 10.3125rem 0 calc(10.3125rem + 3rem);
   }
 `;
 

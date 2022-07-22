@@ -4,7 +4,7 @@ import Thumbnail from "./Thumbnail";
 const Container = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-inline: auto;
+  margin: 0 auto;
   margin-top: 2rem;
   max-width: 445px;
 `;

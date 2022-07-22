@@ -6,7 +6,7 @@ import CartItem from "./CartItem";
 const Container = styled.div`
   border-radius: 10px;
   font-size: 1rem;
-  margin-inline: 0.5rem;
+  margin: 0 0.5rem;
   width: calc(100% - 1rem);
   max-width: 22.5rem;
   position: absolute;
@@ -24,7 +24,7 @@ const Container = styled.div`
   }
 
   @media (min-width: 800px) {
-    margin-inline: 89px;
+    margin: 0 89px;
     top: 5.875rem;
   }
 `;

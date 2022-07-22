@@ -19,17 +19,17 @@ const HeaderWrapper = styled.header`
   display: flex;
   align-items: center;
   gap: 1rem;
-  margin-inline: auto;
+  margin: 0 auto;
   max-width: 550px;
   padding: 1.1875rem 1.5rem 1.5rem;
 
   @media (min-width: 500px) {
-    padding-block: 2rem;
+    padding: 2rem 1.5rem;
   }
 
   @media (min-width: 1000px) {
     gap: 2.5rem;
-    margin-inline: clamp(2rem, 11.5%, 10.3125rem);
+    margin: 0 clamp(2rem, 11.5%, 10.3125rem);
     max-width: unset;
     padding: 1.75rem 0 2.125rem;
 
@@ -48,7 +48,7 @@ const CartWrapper = styled.div`
   display: flex;
   align-items: end;
   height: 1.5rem;
-  margin-inline: auto 6px;
+  margin: 0 6px 0 auto;
   position: relative;
 
   &:hover {

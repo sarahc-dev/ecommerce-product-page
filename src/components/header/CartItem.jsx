@@ -23,7 +23,7 @@ const ProductContainer = styled.div`
 const TextContainer = styled.div`
   font-size: 1rem;
   line-height: 1.625rem;
-  margin-inline: 1rem auto;
+  margin: 0 auto 0 1rem;
 
   & span {
     color: var(--clr-headers);

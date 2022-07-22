@@ -21,7 +21,7 @@ const ModalBackground = styled.div`
 
   @media (max-height: 800px) {
     align-items: start;
-    padding-block: 1.5rem;
+    padding: 1.5rem 0;
   }
 `;
 

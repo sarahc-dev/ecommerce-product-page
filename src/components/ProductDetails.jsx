@@ -39,7 +39,7 @@ const ProductName = styled.h1`
 
 const Description = styled.p`
   color: var(--clr-text);
-  margin-block: 0.9375rem 1.5rem;
+  margin: 0.9375rem 0 1.5rem;
 `;
 
 const PriceContainer = styled.div`
@@ -67,7 +67,7 @@ const Discount = styled.p`
   font-size: 1rem;
   font-weight: 700;
   line-height: 1.25rem;
-  margin-inline: 1rem auto;
+  margin: 0 auto 0 1rem;
   padding: 3.5px 8px;
 
   &:not(.discount) {

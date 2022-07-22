@@ -26,8 +26,16 @@ const Image = styled.img`
   object-fit: cover;
   scroll-snap-align: start;
 
+  @supports not (aspect-ratio: 2) {
+    height: unset;
+  }
+
   @media (min-width: 500px) {
     height: 400px;
+
+    @supports not (aspect-ratio: 2) {
+      height: unset;
+    }
   }
 
   @media (min-width: 550px) {

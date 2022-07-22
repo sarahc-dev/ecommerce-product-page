@@ -20,7 +20,7 @@ const ImageContainer = styled.div`
 `;
 
 const Image = styled.img`
-  ${"" /* aspect-ratio: 2; */}
+  aspect-ratio: 2;
   height: 300px;
   margin-right: 0.75rem;
   object-fit: cover;
@@ -30,6 +30,7 @@ const Image = styled.img`
     height: auto;
     width: 100%;
     object-fit: unset;
+    align-self: start;
   }
 
   @media (min-width: 500px) {
